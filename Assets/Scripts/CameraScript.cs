@@ -17,21 +17,7 @@ public class CameraScript : MonoBehaviour
     void Update()
     {
         
-        if (Input.GetMouseButtonDown(0)) { // if left button pressed...
-            Ray ray = camera.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit)) {
-                // the object identified by hit.transform was clicked
-                Debug.Log("raycast");
-                var fire = hit.collider.transform.parent.gameObject;
-                Debug.Log(fire);
-                var rend = fire.GetComponent<SpriteRenderer>();
-                if(rend != null) {
-                    rend.enabled = false;
-                    Destroy(fire);
-                }
-            }
-        }
+      
     }
     
 }
