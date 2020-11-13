@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour {
@@ -27,17 +28,19 @@ public class EnemyController : MonoBehaviour {
 
     void OnTriggerEnter(Collider collider) {
         if (collider.gameObject.CompareTag("Weapon")) {
-            if (count == 0) {
+            var player = collider.transform.parent.gameObject;
+            var playerScript = player.GetComponent<PlayerController>();
+            if (count == 0 && playerScript.attacking == true) {
                 myRenderer.material.color = Color.yellow;
                 count++;
                 //Debug.Log("should change yellow");
             }
-            else if (count == 1) {
+            else if (count == 1 && playerScript.attacking == true) {
                 myRenderer.material.color = Color.red;
                 count++;
                 //Debug.Log("should change red");
             }
-            else if (count == 2) {
+            else if (count == 2 && playerScript.attacking == true) {
                 this.wasPickedUp = true;
                 count++;
                 //Debug.Log("should disappear");

@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour {
     public Camera camera;
     public GameObject weapon;
     private int lastDirection = 1;
-    private bool attacking = false;
+    public bool attacking = false;
     private float timer;
     public float smooth = 1f;
     private Quaternion targetRotation;
@@ -57,18 +57,22 @@ public class PlayerController : MonoBehaviour {
             lastDirection = -1 * lastDirection;
             timer = 0;
         }
+        else if (timer >= .5) {
+            attacking = false;
+        }
         if (attacking && timer <= .5) {
             weapon.transform.RotateAround(gameObject.transform.position, Vector3.up,
                     180 * lastDirection * Time.deltaTime);
+            attacking = true;
         }
         timer += Time.deltaTime;
+        
 
-
-        if (Input.GetKeyDown(KeyCode.Q)) {
-            targetRotation *= Quaternion.AngleAxis(60, Vector3.up);
+        if (Input.GetKey(KeyCode.Q)) {
+            targetRotation *= Quaternion.AngleAxis(1, Vector3.up);
         }
-        else if (Input.GetKeyDown(KeyCode.E)) {
-            targetRotation *= Quaternion.AngleAxis(60, Vector3.down);
+        else if (Input.GetKey(KeyCode.E)) {
+            targetRotation *= Quaternion.AngleAxis(1, Vector3.down);
         }
         transform.rotation = Quaternion.Lerp(transform.rotation, 
                                             targetRotation, 

@@ -456,9 +456,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bde72241726d5814f85a6c19162d5cf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 10
   camera: {fileID: 519420031}
   weapon: {fileID: 1838459816}
+  attacking: 0
+  smooth: 1
 --- !u!65 &858461419
 BoxCollider:
   m_ObjectHideFlags: 0
