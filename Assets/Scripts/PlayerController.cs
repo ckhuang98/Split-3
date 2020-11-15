@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject weapon;
     private int lastDirection = 1;
     public bool attacking = false;
+    private bool hasAttacked = false;
     private float timer;
     public float smooth = 1f;
     private Quaternion targetRotation;
@@ -27,12 +28,10 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
+
+        //get the axis of the camera and make the player movements based on that
         float horizontalAxis = Input.GetAxis("Horizontal");
         float verticalAxis = Input.GetAxis("Vertical");
-
-        
-        //Debug.Log(camera);
-
         var forward = camera.transform.forward;
         var right = camera.transform.right;
 
@@ -41,47 +40,33 @@ public class PlayerController : MonoBehaviour {
         forward.Normalize();
         right.Normalize();
 
-
         Vector3 desiredMoveDirection = forward * verticalAxis + right * horizontalAxis;
 
-
         transform.position += (desiredMoveDirection * speed * Time.deltaTime);
-
-        //var characterController = this.GetComponent<CharacterController>();
-        //characterController.SimpleMove(desiredMoveDirection.normalized *speed );
         
 
-        if (Input.GetMouseButtonDown(0) && timer >=.5) {
-            attacking = true;
+        //rotate the player by moving the mouse
+        //Get the Screen positions of the object
+        Vector3 positionOnScreen = Camera.main.WorldToViewportPoint(transform.position);
 
-            lastDirection = -1 * lastDirection;
-            timer = 0;
-        }
-        else if (timer >= .5) {
-            attacking = false;
-        }
-        if (attacking && timer <= .5) {
-            weapon.transform.RotateAround(gameObject.transform.position, Vector3.up,
-                    180 * lastDirection * Time.deltaTime);
-            attacking = true;
-        }
-        timer += Time.deltaTime;
-        
+        //Get the Screen position of the mouse
+        Vector3 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
 
-        if (Input.GetKey(KeyCode.Q)) {
-            targetRotation *= Quaternion.AngleAxis(1, Vector3.up);
+        //Get the angle between the points
+        float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
+
+        //Set the actual angle. Need to adjust it by 45 degrees because we're in isometric
+        transform.rotation = Quaternion.Euler(new Vector3(0f, -angle - 45, 0f));
+
+
+        if (Input.GetMouseButtonDown(0)) {
+            weapon.GetComponent<Stick>().PerformAttack();
         }
-        else if (Input.GetKey(KeyCode.E)) {
-            targetRotation *= Quaternion.AngleAxis(1, Vector3.down);
+
+
+
         }
-        transform.rotation = Quaternion.Lerp(transform.rotation, 
-                                            targetRotation, 
-                                            10 * smooth * Time.deltaTime);
+    float AngleBetweenTwoPoints(Vector3 a, Vector3 b) {
+        return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
     }
-
-    void OnClick(GameObject weapon, GameObject Player) {
-
-        
-    }
-
 }

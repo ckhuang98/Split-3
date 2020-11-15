@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Weapon
+  - FireStarter
+  - FireSprite
+  - Enemy
   layers:
   - Default
   - TransparentFX
