@@ -5,12 +5,21 @@ using UnityEngine;
 
 public class CameraScript : MonoBehaviour
 {
-
+    public GameObject player;
+    public GameObject stick;
+    public float smooth = 1f;
     private Quaternion targetRotation;
+    private Vector3 offset;
+    public float x = 15;
+    public float y = 10;
+    public float z = -15;
     // Start is called before the first frame update
     void Start()
     {
-        
+        //this.transform.eulerAngles = new Vector3(24, -45, 0);
+        //targetRotation.eulerAngles = new Vector3(24, -45, 0);
+        var PlayerPOS = player.transform.position;
+        offset = new Vector3 (PlayerPOS.x + 15, PlayerPOS.y + 10, PlayerPOS.z - 15);
     }
 
     // Update is called once per frame
@@ -18,17 +27,23 @@ public class CameraScript : MonoBehaviour
     void Update() {
         //rotate camera by holding q and e
         if (Input.GetKey(KeyCode.Q)) {
-            targetRotation *= Quaternion.AngleAxis(1, Vector3.up);
+            //targetRotation *= Quaternion.AngleAxis(1, Vector3.up);
+            offset = Quaternion.AngleAxis(1, new Vector3 (0, 1, 0)) * offset;
+            //transform.RotateAround(player.transform.position, new Vector3 (0, 1, 0), 90 * Time.deltaTime);
         }
         else if (Input.GetKey(KeyCode.E)) {
-            targetRotation *= Quaternion.AngleAxis(1, Vector3.down);
+            //targetRotation *= Quaternion.AngleAxis(1, Vector3.down);
+            offset = Quaternion.AngleAxis(1, new Vector3(0, -1, 0)) * offset;
+            //transform.RotateAround(player.transform.position, new Vector3 (0, -1, 0), 90 * Time.deltaTime);
         }
-        //camera.transform.rotation = Quaternion.Lerp(transform.rotation, 
-        //targetRotation, 
-        //10 * smooth * Time.deltaTime);
+        //transform.rotation = Quaternion.Lerp(transform.rotation, 
+            //targetRotation, 
+            //10 * smooth * Time.deltaTime);
         int DistanceAway = 30;
-        Vector3 PlayerPOS = GameObject.Find("PlayerCube").transform.transform.position;
-        transform.position = new Vector3(PlayerPOS.x + 25, PlayerPOS.y+15, PlayerPOS.z - 25);
+        transform.position = player.transform.position + offset + new Vector3(x, y, z);
+        transform.LookAt(player.transform.position);
+        //Debug.Log(PlayerPOS);
+        //transform.position = new Vector3(PlayerPOS.x + 25, PlayerPOS.y+15, PlayerPOS.z - 25);
 
 
     }

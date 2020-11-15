@@ -12,17 +12,17 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody rb;
     public Camera camera;
     public GameObject weapon;
-    private int lastDirection = 1;
+    //private int lastDirection = 1;
     public bool attacking = false;
-    private bool hasAttacked = false;
-    private float timer;
+    //private bool hasAttacked = false;
+    //private float timer;
     public float smooth = 1f;
-    private Quaternion targetRotation;
+    //private Quaternion targetRotation;
     // Start is called before the first frame update
     void Start() {
         rb = this.GetComponent<Rigidbody>();
-        timer = 0;
-        targetRotation = transform.rotation;
+        //timer = 0;
+        //targetRotation = transform.rotation;
     }
 
     // Update is called once per frame
