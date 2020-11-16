@@ -1,9 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using UnityEditor.Build;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour {
 
@@ -11,20 +9,10 @@ public class EnemyController : MonoBehaviour {
     int count = 0;
     bool once = true;
     Renderer myRenderer;
-    private NavMeshAgent navAgent;
-    public LayerMask aggroLayerMask;
-    private Collider[] withinAggroColliders;
-    private float stealthRange = 0;
-    public GameObject player;
-    private float timer;
-    
-    public float agroRange = 0;
-    
     // Start is called before the first frame update
     void Start() {
         myRenderer = this.GetComponent<Renderer>();
-        //Debug.Log("in enemy script");
-        navAgent = GetComponent<NavMeshAgent>();
+        Debug.Log("in enemy script");
     }
 
     // Update is called once per frame
@@ -34,28 +22,8 @@ public class EnemyController : MonoBehaviour {
 
         if (this.wasPickedUp) {
             transform.localScale *= 0.99f;
-            timer += Time.deltaTime;
         }
 
-        if(timer >= 3) {
-            Destroy(gameObject);
-            Destroy(this);
-        }
-        var stealthRangeObject = GameObject.FindGameObjectWithTag("Stealth");
-        if (Input.GetKey(KeyCode.Space)) {
-           
-            stealthRangeObject.transform.localScale = new Vector3(10, .5f, 10);
-        }
-        else {
-            stealthRangeObject.transform.localScale = new Vector3(20, .5f, 20);
-        }
-
-        withinAggroColliders = Physics.OverlapSphere(transform.position, agroRange, aggroLayerMask);
-
-        if(withinAggroColliders.Length > 0) {
-            //Debug.Log("Found player");
-            chasePlayer(player.transform.position);
-        }
     }
 
     //this should no longer be used
@@ -72,17 +40,10 @@ public class EnemyController : MonoBehaviour {
         }
         else if (count == 2 ) {
             this.wasPickedUp = true;
-            timer = 0;
             count++;
             //Debug.Log("should disappear");
         }
         
-    }
-
-    void chasePlayer(Vector3 destination) {
-        //Debug.Log(player.transform.position);
-        navAgent.SetDestination(destination);
-
     }
 
 }

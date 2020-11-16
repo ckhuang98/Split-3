@@ -121,6 +121,7 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+<<<<<<< HEAD
 --- !u!1 &7643556
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,6 +257,8 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+=======
+>>>>>>> parent of 84ee936... Enemies walk toward player if in range
 --- !u!1 &433307808
 GameObject:
   m_ObjectHideFlags: 0
@@ -544,6 +547,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+<<<<<<< HEAD
 --- !u!1 &773903264
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,6 +614,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> parent of 84ee936... Enemies walk toward player if in range
 --- !u!4 &816696373 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7647679044037586912, guid: 6841ecdc0454a9f47965c7540b199a67,
@@ -742,6 +748,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 50.38, z: 0}
+<<<<<<< HEAD
 --- !u!1 &895395128
 GameObject:
   m_ObjectHideFlags: 0
@@ -816,6 +823,8 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 895395128}
   m_CullTransparentMesh: 0
+=======
+>>>>>>> parent of 84ee936... Enemies walk toward player if in range
 --- !u!1 &1066213287
 GameObject:
   m_ObjectHideFlags: 0
