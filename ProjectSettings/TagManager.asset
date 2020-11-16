@@ -9,6 +9,8 @@ TagManager:
   - FireSprite
   - Enemy
   - Stealth
+  - Food
+  - Water
   layers:
   - Default
   - TransparentFX

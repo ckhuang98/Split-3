@@ -19,16 +19,42 @@ public class PlayerController : MonoBehaviour {
     //private float timer;
     public float smooth = 1f;
     //private Quaternion targetRotation;
+
+    public int maxHealth = 200;
+    public int currentHealth;
+
+    public HealthBar healthBar;
     // Start is called before the first frame update
+
+    public int maxHunger = 100;
+    public int currentHunger;
+
+    public int maxThirst = 100;
+    public int currentThirst = 100;
+
+    public HungerBar hungerBar;
+    public ThirstBar thirstBar;
+
+    private const float TICK_TIMER_MAX = 1.0f;
+
+    private float tickTimer;
+
     void Start() {
         rb = this.GetComponent<Rigidbody>();
         //timer = 0;
         //targetRotation = transform.rotation;
+
+        currentHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+        currentHunger = maxHunger;
+        hungerBar.SetMaxHunger(maxHunger);
+        currentThirst = maxThirst;
+        thirstBar.SetMaxThirst(maxThirst);
     }
 
     // Update is called once per frame
     void Update() {
-
+        tick();
 
         //get the axis of the camera and make the player movements based on that
         float horizontalAxis = Input.GetAxis("Horizontal");
@@ -64,10 +90,55 @@ public class PlayerController : MonoBehaviour {
             weapon.GetComponent<Stick>().PerformAttack();
         }
 
+        if (Input.GetKeyDown(KeyCode.X)) {
+            TakeDamage(20);
+
+        }
+
 
 
         }
     float AngleBetweenTwoPoints(Vector3 a, Vector3 b) {
         return Mathf.Atan2(a.y - b.y, a.x - b.x) * Mathf.Rad2Deg;
+    }
+
+    void TakeDamage(int damage){
+        currentHealth -= damage;
+        healthBar.SetHealth(currentHealth);
+    }
+
+    void OnTriggerEnter(Collider collider) {
+        if(collider.gameObject.CompareTag("Enemy")){
+            TakeDamage(20);
+        }
+
+        if(collider.gameObject.CompareTag("Food")){
+            currentHunger += 10;
+            Destroy(collider.gameObject);
+        }
+
+        if(collider.gameObject.CompareTag("Water")){
+            currentThirst += 10;
+            Destroy(collider.gameObject);
+        }
+
+    }
+
+    void tick(){
+        tickTimer += Time.deltaTime;
+        if(tickTimer >= TICK_TIMER_MAX){
+            tickTimer -= TICK_TIMER_MAX;
+            currentHunger -= 5;
+            currentThirst -= 5;
+            if(currentHunger < 0 || currentThirst < 0){
+                TakeDamage(10);
+                currentHunger = 0;
+                currentThirst = 0;
+            }
+
+            hungerBar.SetHunger(currentHunger);
+            thirstBar.SetThirst(currentThirst);
+            
+        }
     }
 }
