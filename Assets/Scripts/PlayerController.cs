@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.ExceptionServices;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEngine.Video;
 
@@ -42,8 +43,8 @@ public class PlayerController : MonoBehaviour {
 
         Vector3 desiredMoveDirection = forward * verticalAxis + right * horizontalAxis;
 
-        transform.position += (desiredMoveDirection * speed * Time.deltaTime);
-        
+        this.GetComponent<NavMeshAgent>().destination = transform.position + desiredMoveDirection;
+
 
         //rotate the player by moving the mouse
         //Get the Screen positions of the object
