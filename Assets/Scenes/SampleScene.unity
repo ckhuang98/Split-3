@@ -123,6 +123,9 @@ NavMeshSettings:
   m_NavMeshData: {fileID: 0}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of cfdbe93... Readded navmesh and stealth range changes
 --- !u!1 &7643556
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,6 +555,9 @@ Transform:
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> parent of cfdbe93... Readded navmesh and stealth range changes
 --- !u!1 &773903264
 GameObject:
   m_ObjectHideFlags: 0
@@ -618,10 +624,13 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 =======
 >>>>>>> parent of 84ee936... Enemies walk toward player if in range
 =======
 >>>>>>> parent of 84ee936... Enemies walk toward player if in range
+=======
+>>>>>>> parent of cfdbe93... Readded navmesh and stealth range changes
 --- !u!4 &816696373 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7647679044037586912, guid: 6841ecdc0454a9f47965c7540b199a67,
