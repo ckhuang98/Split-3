@@ -10,9 +10,9 @@ public class CameraScript : MonoBehaviour
     public float smooth = 1f;
     private Quaternion targetRotation;
     private Vector3 offset;
-    public float x = 15;
-    public float y = 10;
-    public float z = -15;
+    public float x = 25;
+    public float y = 40;
+    public float z = -25;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,12 +28,12 @@ public class CameraScript : MonoBehaviour
         //rotate camera by holding q and e
         if (Input.GetKey(KeyCode.Q)) {
             //targetRotation *= Quaternion.AngleAxis(1, Vector3.up);
-            offset = Quaternion.AngleAxis(1, new Vector3 (0, 1, 0)) * offset;
+            //offset = Quaternion.AngleAxis(1, new Vector3 (0, 1, 0)) * offset;
             //transform.RotateAround(player.transform.position, new Vector3 (0, 1, 0), 90 * Time.deltaTime);
         }
         else if (Input.GetKey(KeyCode.E)) {
             //targetRotation *= Quaternion.AngleAxis(1, Vector3.down);
-            offset = Quaternion.AngleAxis(1, new Vector3(0, -1, 0)) * offset;
+            //offset = Quaternion.AngleAxis(1, new Vector3(0, -1, 0)) * offset;
             //transform.RotateAround(player.transform.position, new Vector3 (0, -1, 0), 90 * Time.deltaTime);
         }
         //transform.rotation = Quaternion.Lerp(transform.rotation, 
@@ -41,7 +41,7 @@ public class CameraScript : MonoBehaviour
             //10 * smooth * Time.deltaTime);
         int DistanceAway = 30;
         transform.position = player.transform.position + offset + new Vector3(x, y, z);
-        transform.LookAt(player.transform.position);
+        //transform.LookAt(player.transform.position);
         //Debug.Log(PlayerPOS);
         //transform.position = new Vector3(PlayerPOS.x + 25, PlayerPOS.y+15, PlayerPOS.z - 25);
 

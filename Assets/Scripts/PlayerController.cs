@@ -74,16 +74,16 @@ public class PlayerController : MonoBehaviour {
 
         //rotate the player by moving the mouse
         //Get the Screen positions of the object
-        Vector3 positionOnScreen = Camera.main.WorldToViewportPoint(transform.position);
+        Vector3 positionOnScreen = camera.WorldToViewportPoint(transform.position);
 
         //Get the Screen position of the mouse
-        Vector3 mouseOnScreen = (Vector2)Camera.main.ScreenToViewportPoint(Input.mousePosition);
+        Vector3 mouseOnScreen = (Vector2)camera.ScreenToViewportPoint(Input.mousePosition);
 
         //Get the angle between the points
         float angle = AngleBetweenTwoPoints(positionOnScreen, mouseOnScreen);
 
-        //Set the actual angle. Need to adjust it by 45 degrees because we're in isometric
-        transform.rotation = Quaternion.Euler(new Vector3(0f, -angle - 45, 0f));
+        //Set the actual angle. Need to adjust it by 45 degrees because we're in isometric* camera.transform.rotation.y
+        transform.rotation = Quaternion.Euler(new Vector3(0f, -angle -45, 0f));
 
 
         if (Input.GetMouseButtonDown(0)) {

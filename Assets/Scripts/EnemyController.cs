@@ -37,7 +37,7 @@ public class EnemyController : MonoBehaviour {
             timer += Time.deltaTime;
         }
 
-        if(timer >= 3) {
+        if(timer >= 1) {
             Destroy(gameObject);
             Destroy(this);
         }
