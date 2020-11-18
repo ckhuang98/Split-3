@@ -128,8 +128,8 @@ public class PlayerController : MonoBehaviour {
         tickTimer += Time.deltaTime;
         if(tickTimer >= TICK_TIMER_MAX){
             tickTimer -= TICK_TIMER_MAX;
-            currentHunger -= 5;
-            currentThirst -= 5;
+            currentHunger -= 1;
+            currentThirst -= 3;
             if(currentHunger < 0 || currentThirst < 0){
                 TakeDamage(10);
                 currentHunger = 0;

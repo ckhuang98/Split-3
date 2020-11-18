@@ -5511,9 +5511,9 @@ MonoBehaviour:
   player: {fileID: 858461415}
   stick: {fileID: 1838459816}
   smooth: 1
-  x: 25
-  y: 25.3
-  z: -25
+  x: -53.5
+  y: -8
+  z: 51
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -5541,7 +5541,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 2.91
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
