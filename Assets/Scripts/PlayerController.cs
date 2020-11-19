@@ -39,6 +39,10 @@ public class PlayerController : MonoBehaviour {
 
     private float tickTimer;
 
+    public Interactable focus;
+
+    Camera cam;
+
     void Start() {
         rb = this.GetComponent<Rigidbody>();
         //timer = 0;
@@ -50,6 +54,8 @@ public class PlayerController : MonoBehaviour {
         hungerBar.SetMaxHunger(maxHunger);
         currentThirst = maxThirst;
         thirstBar.SetMaxThirst(maxThirst);
+
+        cam = Camera.main;
     }
 
     // Update is called once per frame
@@ -90,8 +96,22 @@ public class PlayerController : MonoBehaviour {
             weapon.GetComponent<Stick>().PerformAttack();
         }
 
-        if (Input.GetKeyDown(KeyCode.X)) {
-            TakeDamage(20);
+        if (Input.GetKeyDown(KeyCode.F)) {
+            // We create a ray
+			Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+			RaycastHit hit;
+            Debug.Log("Attempting Pick Up");
+
+			// If the ray hits
+			if (Physics.Raycast(ray, out hit, 100))
+			{
+				Interactable interactable = hit.collider.GetComponent<Interactable>();
+                if (interactable != null)
+				{
+					SetFocus(interactable);
+				}
+			}
+
 
         }
 
@@ -107,22 +127,22 @@ public class PlayerController : MonoBehaviour {
         healthBar.SetHealth(currentHealth);
     }
 
-    void OnTriggerEnter(Collider collider) {
-        if(collider.gameObject.CompareTag("Enemy")){
-            TakeDamage(20);
-        }
+    // void OnTriggerEnter(Collider collider) {
+    //     if(collider.gameObject.CompareTag("Enemy")){
+    //         TakeDamage(20);
+    //     }
 
-        if(collider.gameObject.CompareTag("Food")){
-            currentHunger += 10;
-            Destroy(collider.gameObject);
-        }
+    //     if(collider.gameObject.CompareTag("Food")){
+    //         currentHunger += 10;
+    //         Destroy(collider.gameObject);
+    //     }
 
-        if(collider.gameObject.CompareTag("Water")){
-            currentThirst += 10;
-            Destroy(collider.gameObject);
-        }
+    //     if(collider.gameObject.CompareTag("Water")){
+    //         currentThirst += 10;
+    //         Destroy(collider.gameObject);
+    //     }
 
-    }
+    // }
 
     void tick(){
         tickTimer += Time.deltaTime;
@@ -141,4 +161,29 @@ public class PlayerController : MonoBehaviour {
             
         }
     }
+    
+    // Set our focus to a new focus
+	void SetFocus (Interactable newFocus)
+	{
+		// If our focus has changed
+		if (newFocus != focus)
+		{
+			// Defocus the old one
+			if (focus != null)
+				focus.OnDefocused();
+
+			focus = newFocus;	// Set our new focus
+		}
+		
+		newFocus.OnFocused(transform);
+	}
+
+	// Remove our current focus
+	void RemoveFocus ()
+	{
+		if (focus != null)
+			focus.OnDefocused();
+
+		focus = null;
+	}
 }
