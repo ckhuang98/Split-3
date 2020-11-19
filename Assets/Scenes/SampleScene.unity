@@ -4132,6 +4132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemsParent: {fileID: 1330524687}
+  inventoryUI: {fileID: 2092358402}
 --- !u!1001 &320310534
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24860,6 +24861,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1330524687}
     m_Modifications:
+    - target: {fileID: 4584178495456975423, guid: 76397025ca9dae540ae5cd46114bfe25,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 858461415}
     - target: {fileID: 8541730218856550172, guid: 76397025ca9dae540ae5cd46114bfe25,
         type: 3}
       propertyPath: m_Name
